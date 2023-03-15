@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js">
+        
+    </script>
+</head>
+<body>
+    <div class="root">
+        <h1>Hello {{name.toUpperCase()}}</h1>
+    </div>
+    <script type="text/javascript">
+        // 创建Vue实例
+        new Vue({
+            el:".root", //el用于指定当前Vue实例为哪个容器服务，值通常为css选择器字符串
+            data:{
+                name:"World ass"
+            }
+        });
+    </script>
+</body>
+</html>
