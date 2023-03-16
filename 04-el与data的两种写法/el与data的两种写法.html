@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">你好，{{name}}</div>
+    <script type="text/javascript">
+        // el的两种写法
+        // const v = new Vue({
+        //     // el:"#root",指定对象的第一种方法
+        //     data: {
+        //         name: "世界"
+        //     }
+        // })
+        // // v.$mount("#root")//另外一种指定对象的方法
+        // setTimeout(()=>{v.$mount("#root")},1000);
+        
+        new Vue({
+            el:"root",
+            // 第一种写法：对象式
+            // data: {
+            //     name:"世界"
+            // }
+
+            // data的第二种写法：函数式（配合组件使用）
+            data:function(){
+                return {
+                    name:"世界"
+                }
+            }
+        })
+    </script>
+</body>
+</html>
