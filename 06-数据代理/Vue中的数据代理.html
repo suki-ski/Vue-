@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+<body>
+    <!-- 准备好容器 -->
+    <div id="root">
+        <h2>学校名称：{{_data.name}}</h2>
+        <h2>学校网址：{{address}}</h2>
+    </div>
+    <script type='text/javascript'>
+        const vm = new Vue({
+            data:{
+                name:"湖南工程学院",
+                address:"http://jwcmis.hnie.edu.cn/",
+            }
+        })
+        vm.$mount("#root");
+    </script>
+</body>
+</html>

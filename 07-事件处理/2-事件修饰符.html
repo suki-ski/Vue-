@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .father {
+            width: 400px;
+            height: 400px;
+            padding-top: 100px;
+            background-color: skyblue;
+        }
+        .son {
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            background-color: purple;
+        }
+        .box1 {
+            width: 200px;
+            height: 200px;
+            padding-top: 50px;
+            background-color: yellowgreen;
+        }
+        .box2 {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto;
+            background-color: red;
+        }
+        .list {
+            width: 200px;
+            height: 200px;
+            overflow: scroll;
+            background-color: peru;
+        }
+        .list li {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <h2>欢迎来到{{name}}学习</h2>
+        <!-- <a :href="url" v-on:click="showInfo">你所热爱的就是你的生活</a> -->
+        <!-- prevent阻止默认事件 -->
+        <a :href="url" @click.prevent="showInfo">你所热爱的就是你的生活</a>
+        <!-- stop阻止冒泡 -->
+        <div class="father" @click="upper">
+            <div class="son" @click.stop="lower"></div>
+        </div>
+        <!-- once使事件只触发一次 -->
+        <button @click.once="remind">take medicine</button>
+        <!-- capture使用事件的捕获模式 -->
+        <div class="box1" @click.capture="showMsg(1)">
+            <div class="box2" @click="showMsg(2)">
+            </div>
+        </div>
+        <!-- self只用`event.target`是当前操作的元素时，才触发是事件 -->
+        <div class="father" @click.self="upper">
+            <div class="son" @click="lower"></div>
+        </div>
+        <!-- passive事件的默认行为立即执行，无需等待事件回调执行完成 -->
+        <!-- scroll滚动条 不会存在上述问题-->
+        <!-- wheel滚轮 -->
+        <ul class="list" @wheel.passive="demo">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+        </ul>
+    </div>
+
+    <script type='text/javascript'>
+        new Vue({
+            el:"#root",
+            data:{
+                name:"尚硅谷",
+                url:"http://www.bilibili.com",
+            },
+            methods:{
+                showInfo(e){
+                    // e.preventDefault();//阻止默认行为(跳转行为)
+                    alert("同学你好！");
+                },
+                upper(e){
+                    alert("上级弹出");
+                },
+                lower(e){
+                    alert("下级弹出");
+                    console.log(e.target);
+                },
+                remind(e){
+                    alert("remind of taking medicine");
+                },
+                showMsg(msg){
+                    alert(msg);
+                },
+                demo(){
+                    for(let i = 0;i<100000;i++){
+                        console.log("の");
+                    }
+                }
+            }
+        })
+
+    </script>
+</body>
+</html>
