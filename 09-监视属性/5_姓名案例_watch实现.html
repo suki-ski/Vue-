@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+<body>
+    <div id="root">
+        姓: <input type="text" v-model="firstName"><br>
+        名: <input type="text" v-model="lastName"><br>
+        <!-- get只调用一次，因为fullName被加载到了缓存中，下次调用直接找缓存获取 -->
+        姓名: <span>{{fullName}}</span><br>
+    </div> 
+    <script type='text/javascript'>
+        const vm = new Vue({
+            el:"#root",
+            data:{
+                firstName:"张",
+                lastName:"三",
+                fullName:"张-三"
+            },
+            methods:{
+            },
+            watch:{
+                firstName(value){
+                    setTimeout(()=>{
+                        this.fullName = value+"-"+this.lastName;
+                    },1000)
+                },
+                lastName(value){
+                    setTimeout(()=>{
+                        this.fullName = this.firstName+"-"+value;
+                    },1000)
+                }
+            },
+        })
+    </script>
+</body>
+</html>
