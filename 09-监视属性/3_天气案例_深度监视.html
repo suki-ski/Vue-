@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+<body>
+    <div id="root">
+        <h2>今天天气很{{condition}}</h2>
+        <!-- <button @click="changeWeather">切换天气</button> -->
+        <!-- @xxx="yyy",yyy可以写一些简单的语句 -->
+        <button @click="isHot = !isHot">切换天气</button>
+        <hr/>
+        <h3>a的值是{{numbers.a}}</h3>
+        <button @click="numbers.a++">a++</button>
+        <hr/>
+        <h3>b的值是{{numbers.b}}</h3>
+        <button @click="numbers.b++">b++</button>
+        <hr/>
+        <h3>f的值是{{numbers.c.d.e.f}}</h3>
+        <button @click="numbers.c.d.e.f++">f++</button>
+    </div>
+
+    <script type='text/javascript'>
+        new Vue({
+            el: "#root",
+            data: {
+                isHot:true,
+                numbers:{
+                    a:1,
+                    b:2,
+                    c:{
+                        d:{
+                            e:{
+                                f:3,
+                            }
+                        }
+                    }
+                }
+            },
+            methods: {
+                changeWeather(){
+                    // this.isHot = !this.isHot;
+                }
+            },
+            computed: {
+                condition:function getData(){
+                    return this.isHot?"炎热":"凉爽";
+                }
+            },
+            watch:{
+                condition:{
+                    handler(newValue,oldValue){
+                        console.log("condition被修改了");
+                    }
+                },
+                //1.用字符串表示对象属性被调用
+                // "numbers.a":{
+                //     handler(){
+                //         console.log("numbers.a被修改了");
+                //     }
+                // }
+
+                //2.深度检测(监视所用属性的变化)
+                numbers:{
+                    deep:true,
+                    handler(){
+                        console.log("numbers内部属性被修改了");
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
