@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+<body>
+    <div id="root">
+        <h2>当前的n值是:{{n}}</h2>
+        <button @click="n++">n++</button>
+
+        <!-- 使用v-show做条件渲染(切换频率高用show) -->
+        <!-- <h2 v-show="false">欢迎来到{{name}}</h2>
+        <h2 v-show="1==1">欢迎来到{{name}}</h2>
+        <h2 v-show="a">欢迎来到{{name}}</h2> -->
+
+        <!-- 使用v-if做条件渲染(切换频率低用if) -->
+        <!-- <h2 v-if="false">欢迎来到{{name}}</h2> -->
+
+        <!-- <div v-show="n === 1">Angular</div>
+        <div v-show="n === 2">React</div>
+        <div v-show="n === 3">Vue</div> -->
+
+        <!-- v-else和v-else-if(结构必须是连续的，不能被打断) -->
+        <!-- <div v-if="n === 1">Angular</div>
+        <div v-else-if="n === 2">React</div>
+        <div v-else-if="n === 3">Vue</div>
+        <div v-else>Vue</div> -->
+
+        <!-- template需要配合v-if使用，不能和v-show配合使用 -->
+        <template v-if="n===1">
+            <h2>你好</h2>
+            <h2>你好</h2>
+            <h2>你好</h2>
+        </template>
+    </div>
+</body>
+<script type='text/javascript'>
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            a:true,
+            n:0,
+            name:"睿智学校",
+        }
+    })
+</script>
+</html>

@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
     <style>
         .basic {
             width: 400px;
@@ -36,7 +37,48 @@
 </head>
 <body>
     <div id="root">
-        <div class="basic part1 part2 part3">test</div>
+        <!-- 绑定class样式--字符串写法，适用于：样式的类名不确定，需要动态指定 -->
+        <div class="basic" :class="mood" @click="changeMood">{{name}}</div><br/><br/>
+        <!-- 绑定class样式--数组写法，适用于：要绑定的样式个数不确定，名字不确定 -->
+        <div class="basic" :class="classArr">{{name}}</div><br/><br/>
+        <!-- 绑定class样式--对象写法，适用于：要绑定的样式个数确定，名字也确定，要动态决定用不用 -->
+        <div class="basic" :class="classObj">{{name}}</div><br/><br/>
+        <!-- 绑定style样式--对象写法 -->
+        <div class="basic" :style="styleObj">{{name}}</div><br/><br/>
+        <!-- 绑定style样式--数组写法 -->
+        <div class="basic" :style="[styleObj,styleObj2]">{{name}}</div><br/><br/>
+
     </div>
+    <script type='text/javascript'>
+        new Vue({
+            el:"#root",
+            data:{
+                name:"睿智",
+                mood:"normal",
+                classArr:["part1","part2","part3"],
+                classObj:{
+                    part1:true,
+                    part2:false,
+                },
+                styleObj:{
+                    fontSize: 40+'px',
+                    color:"red",
+                },
+                styleObj2:{
+                    backgroundColor:"orange",
+                }
+            },
+            methods:{
+                changeMood(){
+                    //js原生实现
+                    // console.log("hhh");
+                    // document.getElementById("root").children[0].className = "basic happy";
+                    const arr = ["happy","sad","normal"];
+                    const random = Math.floor(Math.random()*3);
+                    this.mood = arr[random];
+                }
+            }
+        });
+    </script>
 </body>
 </html>
