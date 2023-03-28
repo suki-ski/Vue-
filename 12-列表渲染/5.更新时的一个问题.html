@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+<body>
+    <div id="root">
+        <h2>人员列表</h2>
+        <button @click="change">点我更新数据</button>
+        <ul>
+            <!-- key的另一种写法 -->
+            <li v-for="(person,index) in persons" :key="person.id">
+                {{person.name}}-{{person.age}}-{{person.sex}}
+            </li>
+        </ul>
+
+    </div>
+    <script type='text/javascript'>
+        new Vue({
+            el:"#root",
+            data:{
+                persons:[
+                    {id:"001",name:"乌迪鲁斯",age:"75",sex:"男"},
+                    {id:"002",name:"洛奇希",age:"19",sex:"女"},
+                    {id:"003",name:"艾莉丝",age:"70",sex:"女"},
+                    {id:"004",name:"希露菲",age:"21",sex:"女"},
+                ],
+            },
+            methods: {
+                change(){
+                    // this.persons[0].name="鲁迪";
+                    // this.persons[0].age=8;
+                    this.persons[0]={id:"001",name:"鲁迪",age:"8",sex:"男"};
+                    //此时数据修改了但是页面中的数据并不会改变
+                }
+            },
+        })
+    </script>
+</body>
+</html>

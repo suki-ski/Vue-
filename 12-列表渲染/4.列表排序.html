@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+<body>
+    <div id="root">
+        <h2>人员列表</h2>
+        <input type="text" placeholder="请输入名字" v-model="keyWord">
+        <button @click="sortType=2">年龄降序</button>
+        <button @click="sortType=1">年龄升序</button>
+        <button @click="sortType=0">原顺序</button>
+        <ul>
+            <!-- key的另一种写法 -->
+            <li v-for="(person,index) in filPersons" :key="person.id">
+                {{person.name}}-{{person.age}}-{{person.sex}}
+            </li>
+        </ul>
+
+    </div>
+    <script type='text/javascript'>
+        new Vue({
+            el:"#root",
+            data:{
+                keyWord:"",
+                sortType:0,//0:原顺序，1：升序，2：降序
+                persons:[
+                    {id:"001",name:"乌迪鲁斯",age:"75",sex:"男"},
+                    {id:"002",name:"洛奇希",age:"19",sex:"女"},
+                    {id:"003",name:"艾莉丝",age:"70",sex:"女"},
+                    {id:"004",name:"希露菲",age:"21",sex:"女"},
+                ],
+            },
+            //计算属性实现
+            computed:{
+                filPersons(){
+                    const arr = this.persons.filter((person)=>{
+                        return person.name.indexOf(this.keyWord)!=-1;
+                    });//这里是用了一个arr=persons并不会改变persons的值，所以每次都是初始状态
+                    if(this.sortType){
+                        return arr.sort((a,b)=>{
+                            return this.sortType===1?a.age-b.age:b.age-a.age;
+                        });
+                    }
+                    return arr;
+                }
+            }
+        })
+    </script>
+</body>
+</html>
