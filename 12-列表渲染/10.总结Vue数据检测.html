@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+<body>
+    <div id="root">
+        <h1>学生信息</h1>
+        <button @click="student.age++">年龄+1</button>
+        <button @click.once="addSex">添加性别属性，默认：男</button>
+        <button @click.once="addFirstFriend">在列表首位添加一个朋友</button>
+        <button @click.once="modifyFirst">修改第一个朋友的名字：张三</button>
+        <button @click.once="addHobby">添加一个爱好</button>
+        <button @click.once="modifyFirstHobyy">修改第一个爱好为：开车</button>
+        <h3>姓名：{{student.name}}</h3>
+        <h3>年龄：{{student.age}}</h3>
+        <h3 v-if="student.sex">性别：{{student.sex}}</h3>
+        <h3>爱好：</h3>
+        <ul>
+            <li v-for="(hobby,index) in student.hobbys">
+                {{hobby}}
+            </li>
+        </ul>
+        <h3>朋友们：</h3>
+        <ul>
+            <li v-for="(friend,index) in student.friends">
+                {{friend.name}}-{{friend.age}}
+            </li>
+        </ul>
+    </div>
+</body>
+<script type='text/javascript'>
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            student:{
+                name:"田所浩二",
+                age:24,
+                hobbys:[
+                    "哼哼哼啊啊啊",
+                    "被撅",
+                    "114514",
+                ],
+                friends:[
+                    {name:"林檎",age:"24"},
+                    {name:"仙贝",age:"18"},
+                    {name:"野兽",age:"19"},
+                ]
+            }
+        },
+        methods:{
+            addSex(){
+                Vue.set(this.student,"sex","男");
+            },
+            addFirstFriend(){
+                this.student.friends.unshift({name:"先辈",age:"21"});
+            },
+            modifyFirst(){
+                Vue.set(this.student.friends[0],"name","张三");
+            },
+            addHobby(){
+                this.student.hobbys.push("压力马斯内");
+            },
+            modifyFirstHobyy(){
+                this.student.hobbys.splice(0,1,"开车");
+            }
+        }
+    })
+</script>
+</html>

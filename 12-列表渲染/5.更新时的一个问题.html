@@ -34,8 +34,11 @@
                 change(){
                     // this.persons[0].name="鲁迪";
                     // this.persons[0].age=8;
-                    this.persons[0]={id:"001",name:"鲁迪",age:"8",sex:"男"};
+                    // this.persons[0]={id:"001",name:"鲁迪",age:"8",sex:"男"};
                     //此时数据修改了但是页面中的数据并不会改变
+
+                    //要想变成响应式数据,需要调用能改变数组的数组方法
+                    this.persons.splice(0,1,{id:"001",name:"鲁迪",age:"8",sex:"男"});
                 }
             },
         })
