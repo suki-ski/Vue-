@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+    <script type="text/javascript" src="../js/dayjs.min.js"></script>
+</head>
+<body>
+    <div id="root">
+        <h2>显示格式化的时间</h2>
+        <!-- 计算属性实现 -->
+        <h3>现在是：{{fmTime}}</h3>
+        <!-- methods实现 -->
+        <h3>现在是：{{getTime()}}</h3>
+        <!-- 过滤器实现 -->
+        <h3>现在是：{{time | timeFormater}}</h3>
+        <!-- 过滤器传参数 -->
+        <h3>现在是：{{time | timeFormater("YYYY年MM月DD日") | mySlice}}</h3>
+        <h3 :x="msg | mySlice">xxxx</h3>
+    </div>
+    <div id="root2">
+        <h3>{{msg | mySlice}}</h3>
+    </div>
+</body>
+<script type='text/javascript'>
+    //全局过滤器
+    Vue.filter("mySlice",function(){
+        return value.slice(0,4);//截取前四位
+    })
+
+    const vm = new Vue({
+        el:"#root",
+        data:{
+            time:1680490892401,
+            msg:"Hello,World"
+        },
+        methods: {
+            getTime(){
+                return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss");
+            }
+        },
+        computed:{
+            fmTime(){
+                return dayjs(this.time).format("YYYY-MM-DD HH:mm:ss");
+            }
+        },
+        //局部过滤器，一个组件生效，另一个组件不能使用
+        filters:{
+            timeFormater(value,str="YYYY-MM-DD HH:mm:ss"){
+                return dayjs(value).format(str);
+            },
+            mySlice(value){
+                return value.slice(0,4);//截取前四位
+            }
+        },
+    })
+    const vm2 = new Vue({
+        el:"#root2",
+        data:{
+            msg:"hello,World",
+
+        }
+    })
+</script> 
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type='text/javascript' src='../js/vue.js'></script>
+</head>
+<body>
+    <div id="root">
+        <h2 :style="{opacity}">欢迎学习Vue</h2>
+        <!-- {{change()}} -->
+        <!-- 只要修改数据，就会重新解析模板，就会不断开启定时器 -->
+    </div>
+</body>
+<script type='text/javascript'>
+    new Vue({
+        el:"#root",
+        data:{
+            opacity:1,
+        },
+        methods:{
+        },
+        // a(){},
+        // Vue完成模板解析并把初始(第一次)的真实的DOM元素放入页面后调用mounted
+        mounted(){
+            //this指向vm
+            setInterval(()=>{
+                this.opacity-=0.01;
+                if(this.opacity<=0) this.opacity = 1;
+            },16);
+        },
+        // c(){}
+    });
+    //通过外部的定时器实现(不推荐)
+    // setInterval(()=>{
+    //     vm.opacity-=0.01;
+    //     if(vm.opacity<=0) vm.opacity = 1;
+    // },16);
+</script>
+</html>
